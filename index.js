@@ -17,9 +17,12 @@ module.exports = function openExternal (url) {
 module.exports.isExternal = function isExternal (url, location) {
   //if it starts with a relative link, or the same domain, then it is not external.
   var origin = (location || window.location).origin
+  //firefox has origin "null" not file...
+
+  if(origin === 'null' && (location || window.location).protocol == 'file:')
+    origin = 'file://'
+
   return !/[#./]/.test(url[0]) && url.indexOf(origin) !== 0
 }
-
-
 
 
