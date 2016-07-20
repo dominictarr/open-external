@@ -16,7 +16,10 @@ module.exports = function openExternal (url) {
 
 module.exports.isExternal = function isExternal (url, location) {
   //if it starts with a relative link, or the same domain, then it is not external.
-  return !/#\.\//.test(url[0]) && url.indexOf(window.location.origin) !== 0
+  var origin = (location || window.location).origin
+  return !/[#./]/.test(url[0]) && url.indexOf(origin) !== 0
 }
+
+
 
 
